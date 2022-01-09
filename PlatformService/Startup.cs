@@ -34,7 +34,7 @@ namespace PlatformService
         {
 
             services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
-      
+
             //if (_env.IsProduction())
             //{
             //    Console.WriteLine("--> Using SqlServer Db");
@@ -43,6 +43,8 @@ namespace PlatformService
             //{
             //    Console.WriteLine("--> Using InMem Db");
             //}
+
+            services.AddScoped<IPlatformRepo, PlatformRepo>();
 
             services.AddControllers();
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -80,6 +82,8 @@ namespace PlatformService
                     await context.Response.WriteAsync(File.ReadAllText("Protos/platforms.proto"));
                 });
             });
+
+            PrepDb.PrepPopulation(app);
         }
     }
 }
