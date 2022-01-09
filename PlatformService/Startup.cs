@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PlatformService.Data;
 
 namespace PlatformService
 {
@@ -31,17 +32,20 @@ namespace PlatformService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            if (_env.IsProduction())
-            {
-                Console.WriteLine("--> Using SqlServer Db");
-            }
-            else
-            {
-                Console.WriteLine("--> Using InMem Db");
-            }
+
+            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+      
+            //if (_env.IsProduction())
+            //{
+            //    Console.WriteLine("--> Using SqlServer Db");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("--> Using InMem Db");
+            //}
 
             services.AddControllers();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformService", Version = "v1" });
