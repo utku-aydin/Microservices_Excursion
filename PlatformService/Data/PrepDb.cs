@@ -20,8 +20,12 @@ namespace PlatformService.Data
                 Console.WriteLine("--> Seeding data...");
 
                 context.Platforms.AddRange(
-                    new Platform() { Name = "Dot Net", Publisher = "Microsoft", Cost = ""}
-                    );
+                    new Platform() { Name = "Dot Net", Publisher = "Microsoft", Cost = ""},
+                    new Platform() { Name = "Dot Net", Publisher = "Microsoft", Cost = "" },
+                    new Platform() { Name = "Dot Net", Publisher = "Microsoft", Cost = "" }
+                );
+
+                context.SaveChanges();
             }
             else
             {
