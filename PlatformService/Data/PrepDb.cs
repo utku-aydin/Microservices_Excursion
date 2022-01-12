@@ -1,4 +1,6 @@
-﻿namespace PlatformService.Data
+﻿using PlatformService.Models;
+
+namespace PlatformService.Data
 {
 
     public static class PrepDb
@@ -13,7 +15,18 @@
 
         private static void SeedData(AppDbContext context)
         {
+            if(!context.Platforms.Any())
+            {
+                Console.WriteLine("--> Seeding data...");
 
+                context.Platforms.AddRange(
+                    new Platform() { Name = "Dot Net", Publisher = "Microsoft", Cost = ""}
+                    );
+            }
+            else
+            {
+                Console.WriteLine("--> We already have data");
+            }
         }
     }
 
